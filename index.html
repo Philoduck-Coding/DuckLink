@@ -1,1 +1,295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>DuckLink | your name</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      background: radial-gradient(circle at 10% 20%, #0a0f1c, #03060c);
+      font-family: 'Inter', sans-serif;
+      color: #edf2ff;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Hauptkarte – modern, Glasphrismus-Touch */
+    .ducklink-card {
+      max-width: 560px;
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(18, 25, 40, 0.65);
+      backdrop-filter: blur(12px);
+      border-radius: 2.5rem;
+      padding: 2rem 1.8rem 1.8rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(66, 153, 225, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid rgba(72, 187, 255, 0.2);
+    }
+
+    .ducklink-card:hover {
+      box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.7);
+      transform: translateY(-3px);
+    }
+
+    /* Avatar Bereich – rund, weicher Glow */
+    .avatar-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.3rem;
+    }
+
+    .avatar {
+      width: 112px;
+      height: 112px;
+      background: linear-gradient(135deg, #1e2a3e, #0f172a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(56, 189, 248, 0.4);
+      transition: all 0.2s;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    /* Fallback falls avatar.png nicht existiert – ein stylishes Icon */
+    .avatar-placeholder-icon {
+      font-size: 4rem;
+      color: #7dd3fc;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+    }
+
+    /* Text unter Avatar */
+    .greeting-text {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .greeting-text h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      background: linear-gradient(120deg, #e0f2fe, #bae6fd);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.2rem;
+    }
+
+    .greeting-text p {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #a0b3d9;
+      margin-top: 0.25rem;
+    }
+
+    /* Buttons Container – modern, responsive */
+    .links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0 2.2rem;
+    }
+
+    /* Custom Button Styles */
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(4px);
+      padding: 0.9rem 1.5rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(71, 85, 105, 0.5);
+      color: #f1f5f9;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .social-btn i {
+      font-size: 1.7rem;
+      width: 2rem;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .social-btn span {
+      flex: 1;
+      letter-spacing: -0.2px;
+    }
+
+    /* Discord Button */
+    .btn-discord {
+      background: linear-gradient(95deg, #1e2a47, #0f172f);
+      border-left: 4px solid #5865F2;
+    }
+    .btn-discord i {
+      color: #5865F2;
+    }
+
+    /* Instagram Button */
+    .btn-instagram {
+      background: linear-gradient(95deg, #1f1a2e, #130b1c);
+      border-left: 4px solid #E4405F;
+    }
+    .btn-instagram i {
+      color: #E4405F;
+    }
+
+    /* GitHub Button */
+    .btn-github {
+      background: linear-gradient(95deg, #111827, #0b0f17);
+      border-left: 4px solid #6e5494;
+    }
+    .btn-github i {
+      color: #e2e8f0;
+    }
+
+    /* Hover-Effekte */
+    .social-btn:hover {
+      transform: translateY(-3px) scale(1.01);
+      background: rgba(30, 41, 59, 0.95);
+      border-color: rgba(100, 116, 139, 0.8);
+      box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .social-btn:hover i {
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    .modern-footer {
+      margin-top: 1.2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(71, 85, 105, 0.4);
+      padding-top: 1.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0.5rem;
+      color: #9ca3cf;
+    }
+
+    .footer-text {
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    .footer-link {
+      color: #7aa2f7;
+      text-decoration: none;
+      font-weight: 600;
+      background: rgba(55, 65, 81, 0.3);
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      transition: background 0.2s, color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-link i {
+      font-size: 0.8rem;
+    }
+
+    .footer-link:hover {
+      background: #2d3a5e;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* responsives fine-tuning */
+    @media (max-width: 480px) {
+      .ducklink-card {
+        padding: 1.5rem 1.2rem;
+      }
+      .social-btn {
+        padding: 0.75rem 1.2rem;
+        font-size: 0.95rem;
+      }
+      .social-btn i {
+        font-size: 1.5rem;
+      }
+      .avatar {
+        width: 90px;
+        height: 90px;
+      }
+      .greeting-text h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .avatar img {
+      background: #0f172a;
+    }
+  </style>
+</head>
+<body>
+  <div class="ducklink-card">
+    <div class="avatar-wrapper">
+      <div class="avatar">
+        <img src="avatar.png" alt="Profilbild DuckLink" onerror="this.onerror=null; this.parentElement.innerHTML = '<i class=\'fas fa-duck avatar-placeholder-icon\'></i>';">
+      </div>
+    </div>
+
+    <div class="greeting-text">
+      <h2>🐤 meine links</h2>
+      <p>Folge mir & vernetze dich</p>
+    </div>
+
+    <div class="links-container">
+      <a href="https://discord.gg/example" class="social-btn btn-discord" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-discord"></i>
+        <span>Discord</span>
+        <i class="fas fa-external-link-alt" style="font-size: 0.8rem; opacity: 0.7;"></i>
+      </a>
+
+      <a href="https://www.instagram.com/example" class="social-btn btn-instagram" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+        <span>Instagram</span>
+        <i class="fas fa-external-link-alt" style="font-size: 0.8rem; opacity: 0.7;"></i>
+      </a>
+
+      <a href="https://github.com/example" class="social-btn btn-github" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i>
+        <span>GitHub</span>
+        <i class="fas fa-external-link-alt" style="font-size: 0.8rem; opacity: 0.7;"></i>
+      </a>
+    </div>
+
+    <div class="modern-footer">
+      <span class="footer-text">
+        <i class="fas fa-code-branch" style="margin-right: 4px;"></i> designet by Philoduck-coding
+      </span>
+      <a href="https://github.com/Philoduck-Coding" class="footer-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> Philoduck-Coding
+      </a>
+    </div>
+  </div>
+</body>
+</html>
